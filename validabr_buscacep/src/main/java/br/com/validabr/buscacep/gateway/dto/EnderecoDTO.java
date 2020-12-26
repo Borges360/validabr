@@ -1,13 +1,8 @@
 package br.com.validabr.buscacep.gateway.dto;
 
 import br.com.validabr.buscacep.gateway.entity.BairroCidadeEntity;
-import br.com.validabr.buscacep.gateway.entity.CodigoTelefoneEntity;
 import br.com.validabr.buscacep.gateway.entity.EnderecoEntity;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -27,11 +22,11 @@ public class EnderecoDTO {
         this(
                 endereco.getCep(),
                 endereco.getLogradouro(),
-                endereco.getTipo_logradouro(),
+                endereco.getTipoLogradouro(),
                 endereco.getComplemento(),
                 endereco.getLocal(),
                 cidade.getCidade(),
-                cidade.getEstado()
+                cidade.getUf()
         );
     }
 

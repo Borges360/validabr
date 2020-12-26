@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @AllArgsConstructor
@@ -25,21 +28,25 @@ public class BuscaCepController {
 
     }
 
-    @GetMapping("/v1/consulta-endereco/{endereco}/{cidade}")
-    public CepDTO buscaCepComEnderecoECidade(@PathVariable("endereco") String endereco, @PathVariable("cidade") String cidade){
+    @GetMapping("/v1/consulta-endereco-cidade/{endereco}/{cidade}")
+    public List<CepDTO> buscaCepComEnderecoECidade(@PathVariable("endereco") String endereco,
+                                                   @PathVariable("cidade") String cidade){
 
-        return buscaEnderecoService.buscaEnderecoComCidade(endereco, cidade);
+        List<CepDTO> cep = buscaEnderecoService.buscaEnderecoComCidade(endereco, cidade);
+        return cep;
+
 
     }
 
-    @GetMapping("/v1/consulta-endereco/{endereco}/{estado}")
-    public CepDTO buscaCepComEnderecoEEstado(@PathVariable("endereco") String endereco, @PathVariable("estado") String estado){
+    @GetMapping("/v1/consulta-endereco-estado/{endereco}/{estado}")
+    public CepDTO buscaCepComEnderecoEEstado(@PathVariable("endereco") String endereco,
+                                             @PathVariable("estado") String estado){
 
         return buscaEnderecoService.buscaEnderecoComEstado(endereco, estado);
 
     }
 
-    @GetMapping("/v1/consulta-endereco/{endereco}/{cidade}/{estado}")
+    @GetMapping("/v1/consulta-endereco-cidade-estado/{endereco}/{cidade}/{estado}")
     public CepDTO buscaCepComEnderecoEEstado(@PathVariable("endereco") String endereco,
                                              @PathVariable("cidade") String cidade,
                                              @PathVariable("estado") String estado){

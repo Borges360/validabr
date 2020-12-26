@@ -13,15 +13,15 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="cidade_search")
+@Table(name="cepbr_cidade")
 public class BairroCidadeEntity {
 
     @Id
     @Column(name = "id_cidade")
     private Integer idCidade;
 
-    @Column(name = "estado")
-    private String estado;
+    @Column(name = "uf")
+    private String uf;
 
     @Column(name = "cidade")
     private String cidade;

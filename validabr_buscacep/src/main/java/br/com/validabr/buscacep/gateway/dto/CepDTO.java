@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +18,9 @@ public class CepDTO {
         this(cep.getCep());
     }
 
+    public CepDTO(CepDTO c) {
+        this.cep = cep;
+    }
 
     private static CepDTO createCepDTO(EnderecoEntity cep) {
         return new CepDTO(cep);

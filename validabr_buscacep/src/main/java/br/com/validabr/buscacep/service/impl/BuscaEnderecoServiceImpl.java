@@ -2,11 +2,16 @@ package br.com.validabr.buscacep.service.impl;
 
 import br.com.validabr.buscacep.gateway.dto.CepDTO;
 import br.com.validabr.buscacep.gateway.entity.BairroCidadeEntity;
+import br.com.validabr.buscacep.gateway.entity.EnderecoEntity;
 import br.com.validabr.buscacep.repository.ConsultaCepRepository;
 import br.com.validabr.buscacep.repository.ConsultaCidadeEstadoRepository;
 import br.com.validabr.buscacep.service.BuscaEnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class BuscaEnderecoServiceImpl implements BuscaEnderecoService {
@@ -17,10 +22,21 @@ public class BuscaEnderecoServiceImpl implements BuscaEnderecoService {
     @Autowired
     private ConsultaCidadeEstadoRepository consultaCidadeEstadoRepository;
 
-    public CepDTO buscaEnderecoComCidade(String endereco, String cidade){
+    public List<CepDTO> buscaEnderecoComCidade(String logradouro, String cidade){ //TODO: fazer busca inteligente
 
-        //TODO: fazer métodos retornar cep passando endereco e cidade
-        return null;
+        List<BairroCidadeEntity> idCidadeLista = consultaCidadeEstadoRepository.findByCidade(cidade);
+        List<CepDTO> listaCep = new ArrayList<>();
+
+        for (BairroCidadeEntity idCidade : idCidadeLista) {
+
+            try {
+                listaCep.add(new CepDTO(consultaCepRepository.findByLogradouroAndIdCidade(logradouro, idCidade.getIdCidade()).getCep()));
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
+
+        return listaCep;
 
     }
 
@@ -36,10 +52,9 @@ public class BuscaEnderecoServiceImpl implements BuscaEnderecoService {
         return null;
     }
 
-    private BairroCidadeEntity buscaIdCidade(String idCidade){
+    private BairroCidadeEntity buscaIdCidade(EnderecoEntity endereco){
 
-        //TODO: Retornar ID da Cidade
-        return null;
+        return consultaCidadeEstadoRepository.findByIdCidade(endereco.getIdCidade());
     }
 
     private BairroCidadeEntity buscaIdEstado(String idCidade){

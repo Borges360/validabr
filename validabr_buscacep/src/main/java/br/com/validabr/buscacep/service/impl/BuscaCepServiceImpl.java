@@ -5,7 +5,6 @@ import br.com.validabr.buscacep.gateway.entity.EnderecoEntity;
 import br.com.validabr.buscacep.gateway.dto.EnderecoDTO;
 import br.com.validabr.buscacep.repository.ConsultaCepRepository;
 import br.com.validabr.buscacep.repository.ConsultaCidadeEstadoRepository;
-import br.com.validabr.buscacep.repository.ConsultaCodigoTelefoneRepository;
 import br.com.validabr.buscacep.service.BuscaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,6 @@ public class BuscaCepServiceImpl implements BuscaCepService {
     @Autowired
     ConsultaCidadeEstadoRepository consultaCidadeEstadoRepository;
 
-    @Autowired
-    ConsultaCodigoTelefoneRepository consultaCodigoTelefoneRepository;
-
     public EnderecoDTO buscaCep(String cep){
 
         EnderecoEntity endereco = new EnderecoEntity();
@@ -34,7 +30,7 @@ public class BuscaCepServiceImpl implements BuscaCepService {
 
     public BairroCidadeEntity buscaCidade(EnderecoEntity endereco){
 
-        return consultaCidadeEstadoRepository.findByIdcidade(endereco.getIdCidade());
+        return consultaCidadeEstadoRepository.findByIdCidade(endereco.getIdCidade());
 
     }
 
