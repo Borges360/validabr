@@ -18,11 +18,11 @@ public class CepDTO {
         this(cep.getCep());
     }
 
-    public CepDTO(CepDTO c) {
+    private CepDTO(CepDTO c) {
         this.cep = cep;
     }
 
-    private static CepDTO createCepDTO(EnderecoEntity cep) {
+    public static CepDTO createCepDTO(EnderecoEntity cep) {
         return new CepDTO(cep);
     }
 }

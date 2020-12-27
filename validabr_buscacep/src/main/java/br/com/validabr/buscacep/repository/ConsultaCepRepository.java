@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface ConsultaCepRepository extends JpaRepository<EnderecoEntity, String> {
@@ -13,6 +15,6 @@ public interface ConsultaCepRepository extends JpaRepository<EnderecoEntity, Str
     EnderecoEntity findByCep(String cep);
 
     @Nullable
-    EnderecoEntity findByLogradouroAndIdCidade(String logradouro, Integer idCidade);
+    List<EnderecoEntity> findByLogradouroContainingAndIdCidade(String logradouro, Integer idCidade);
 
 }

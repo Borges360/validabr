@@ -9,9 +9,11 @@ import br.com.validabr.buscacep.service.BuscaEnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BuscaEnderecoServiceImpl implements BuscaEnderecoService {
@@ -28,11 +30,15 @@ public class BuscaEnderecoServiceImpl implements BuscaEnderecoService {
         List<CepDTO> listaCep = new ArrayList<>();
 
         for (BairroCidadeEntity idCidade : idCidadeLista) {
-
             try {
-                listaCep.add(new CepDTO(consultaCepRepository.findByLogradouroAndIdCidade(logradouro, idCidade.getIdCidade()).getCep()));
+                listaCep.addAll(consultaCepRepository.findByLogradouroContainingAndIdCidade(logradouro, idCidade.getIdCidade()).stream().map(h ->
+                        new CepDTO(h.getCep())).collect(Collectors.toList()));
+            } catch (NonUniqueResultException e) {
+                e.printStackTrace();
+            } catch (NoResultException e) {
+                e.printStackTrace();
             } catch (Exception e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
 
