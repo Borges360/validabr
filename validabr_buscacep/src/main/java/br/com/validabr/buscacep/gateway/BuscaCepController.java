@@ -33,8 +33,7 @@ public class BuscaCepController {
     public List<CepDTO> buscaCepComEnderecoECidade(@PathVariable("endereco") String endereco,
                                                    @PathVariable("cidade") String cidade){
 
-        List<CepDTO> cep = buscaEnderecoService.buscaEnderecoComCidade(endereco, cidade);
-        return cep;
+        return buscaEnderecoService.buscaEnderecoComCidade(endereco, cidade);
 
 
     }

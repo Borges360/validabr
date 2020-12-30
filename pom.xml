@@ -19,7 +19,8 @@
 	<modules>
 		<module>validabr_buscacep</module>
 		<module>validabr_application</module>
-	</modules>
+        <module>validabr_financas</module>
+    </modules>
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
