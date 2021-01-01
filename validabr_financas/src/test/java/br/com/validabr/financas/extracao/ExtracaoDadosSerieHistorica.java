@@ -112,4 +112,6 @@ public class ExtracaoDadosSerieHistorica {
         return linhaTrada;
     }
 
+
+
 }

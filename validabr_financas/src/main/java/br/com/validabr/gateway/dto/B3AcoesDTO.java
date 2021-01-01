@@ -1,8 +1,15 @@
 package br.com.validabr.gateway.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigInteger;
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class B3AcoesDTO {
 
     private String tipo_registro;
@@ -30,5 +37,7 @@ public class B3AcoesDTO {
     private BigInteger pto_exe;
     private String cod_isin;
     private int num_dis;
+
+
 
 }
