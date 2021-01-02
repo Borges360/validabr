@@ -5,13 +5,11 @@ import br.com.validabr.buscacep.gateway.dto.EnderecoDTO;
 import br.com.validabr.buscacep.service.BuscaCepService;
 import br.com.validabr.buscacep.service.BuscaEnderecoService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController

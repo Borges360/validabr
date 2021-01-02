@@ -1,17 +1,11 @@
 package br.com.validabr.financas.extracao;
 
-
-import br.com.validabr.gateway.dto.B3AcoesDTO;
 import org.junit.Test;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 
 public class ExtracaoDadosSerieHistorica {
@@ -33,45 +27,6 @@ public class ExtracaoDadosSerieHistorica {
 
         bw.close();
 
-    }
-
-    @Test
-    public void baixaSerieHistoricaB3(){
-
-        String path = "http://bvmf.bmfbovespa.com.br/InstDados/SerHist/COTAHIST_D29122020.ZIP";
-
-        try (BufferedInputStream in = new BufferedInputStream(new URL(path).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("COTAHIST_D29122020.ZIP")) {
-            byte dataBuffer[] = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private File unzipFile(File arquivo) throws IOException {
-
-        String sourceFile = "test1.txt";
-        FileOutputStream fos = new FileOutputStream(arquivo);
-        ZipOutputStream zipOut = new ZipOutputStream(fos);
-        File fileToZip = new File(sourceFile);
-        FileInputStream fis = new FileInputStream(fileToZip);
-        ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
-        zipOut.putNextEntry(zipEntry);
-        byte[] bytes = new byte[1024];
-        int length;
-        while((length = fis.read(bytes)) >= 0) {
-            zipOut.write(bytes, 0, length);
-        }
-        zipOut.close();
-        fis.close();
-        fos.close();
-
-        return fileToZip;
     }
 
     private String separadorDeDados(String linha){
@@ -111,7 +66,4 @@ public class ExtracaoDadosSerieHistorica {
 
         return linhaTrada;
     }
-
-
-
 }

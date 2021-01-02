@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = "br.com.validabr.buscacep")
-@EnableJpaRepositories(basePackages = "br.com.validabr.buscacep.repository")
-@EntityScan(basePackages = "br.com.validabr.buscacep.gateway")
+@ComponentScan(basePackages = "br.com.validabr.financas")
+@EnableJpaRepositories(basePackages = "br.com.validabr.financas.data.repository")
+@EntityScan(basePackages = "br.com.validabr.financas.gateway")
 public class ValidabrApplication {
 
 	public static void main(String[] args) {

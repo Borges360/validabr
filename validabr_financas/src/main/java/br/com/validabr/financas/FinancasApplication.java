@@ -1,4 +1,4 @@
-package br.com.validabr;
+package br.com.validabr.financas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

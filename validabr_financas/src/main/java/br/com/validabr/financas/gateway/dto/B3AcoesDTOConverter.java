@@ -1,6 +1,4 @@
-package br.com.validabr.financas.data.converter;
-
-import br.com.validabr.gateway.dto.B3AcoesDTO;
+package br.com.validabr.financas.gateway.dto;
 
 import java.math.BigInteger;
 import java.text.ParseException;
@@ -8,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 
 
-public class B3AcoesConverter {
+public class B3AcoesDTOConverter {
 
     public B3AcoesDTO convert(String [] linhaCsv) throws ParseException {
 

@@ -9,19 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>validabr_financas</artifactId>
+    <artifactId>validabr_datas</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>br.com.validabr</groupId>
-            <artifactId>validabr_datas</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -48,5 +42,4 @@
         </dependency>
 
     </dependencies>
-
 </project>

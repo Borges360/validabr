@@ -15,6 +15,16 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>br.com.validabr</groupId>
+            <artifactId>validabr_financas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.validabr</groupId>
+            <artifactId>validabr_datas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
