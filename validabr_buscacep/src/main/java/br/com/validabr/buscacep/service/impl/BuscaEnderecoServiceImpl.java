@@ -5,7 +5,6 @@ import br.com.validabr.buscacep.gateway.entity.BairroCidadeEntity;
 import br.com.validabr.buscacep.gateway.entity.EnderecoEntity;
 import br.com.validabr.buscacep.repository.ConsultaCepRepository;
 import br.com.validabr.buscacep.repository.ConsultaCidadeEstadoRepository;
-import br.com.validabr.buscacep.service.BuscaCepService;
 import br.com.validabr.buscacep.service.BuscaEnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

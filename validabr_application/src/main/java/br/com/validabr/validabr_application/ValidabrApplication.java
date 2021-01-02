@@ -8,6 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"br.com.validabr.buscacep.*", "br.com.validabr.financas.*"})
+@EnableJpaRepositories(basePackages = {"br.com.validabr.buscacep.repository", "br.com.validabr.financas.repository"})
+@EntityScan(basePackages = {"br.com.validabr.buscacep.gateway.*", "br.com.validabr.financas.gateway*"})
 public class ValidabrApplication {
 
 	public static void main(String[] args) {

@@ -1,8 +1,10 @@
-package br.com.validabr.buscacep.service.impl;
+package br.com.validabr.financas.service.impl;
 
-import br.com.validabr.buscacep.repository.B3AcoesRepository;
-import br.com.validabr.buscacep.gateway.dto.B3AcoesDTO;
-import br.com.validabr.buscacep.service.B3AcoesService;
+
+import br.com.validabr.financas.gateway.dto.B3AcoesDTO;
+
+import br.com.validabr.financas.repository.B3AcoesRepository;
+import br.com.validabr.financas.service.B3AcoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

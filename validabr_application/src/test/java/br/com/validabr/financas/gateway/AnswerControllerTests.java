@@ -1,5 +1,6 @@
-package br.com.validabr.buscacep.gateway;
+package br.com.validabr.financas.gateway;
 
+import br.com.validabr.buscacep.gateway.BuscaCepController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

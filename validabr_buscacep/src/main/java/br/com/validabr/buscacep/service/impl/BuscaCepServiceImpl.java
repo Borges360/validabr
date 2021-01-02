@@ -31,11 +31,8 @@ public class BuscaCepServiceImpl implements BuscaCepService {
             return EnderecoDTO.createEnderecoDTO(endereco, cidade);
         } catch (NonUniqueResultException e) {
             e.printStackTrace();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
         return null;
     }
 
@@ -44,11 +41,8 @@ public class BuscaCepServiceImpl implements BuscaCepService {
             return consultaCidadeEstadoRepository.findByIdCidade(endereco.getIdCidade());
         } catch (NonUniqueResultException e) {
             e.printStackTrace();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
         return null;
     }
 
