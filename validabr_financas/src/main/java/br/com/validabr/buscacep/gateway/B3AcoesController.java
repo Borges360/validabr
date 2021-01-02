@@ -1,7 +1,7 @@
-package br.com.validabr.financas.gateway;
+package br.com.validabr.buscacep.gateway;
 
-import br.com.validabr.financas.gateway.dto.B3AcoesDTO;
-import br.com.validabr.financas.service.B3AcoesService;
+import br.com.validabr.buscacep.gateway.dto.B3AcoesDTO;
+import br.com.validabr.buscacep.service.B3AcoesService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

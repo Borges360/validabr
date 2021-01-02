@@ -1,8 +1,8 @@
-package br.com.validabr.financas.service.impl;
+package br.com.validabr.buscacep.service.impl;
 
-import br.com.validabr.financas.data.repository.B3AcoesRepository;
-import br.com.validabr.financas.gateway.dto.B3AcoesDTO;
-import br.com.validabr.financas.service.B3AcoesService;
+import br.com.validabr.buscacep.repository.B3AcoesRepository;
+import br.com.validabr.buscacep.gateway.dto.B3AcoesDTO;
+import br.com.validabr.buscacep.service.B3AcoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,9 @@ public class B3AcoesServiceImpl implements B3AcoesService {
 
     public List<B3AcoesDTO> buscaAcoesPeloCodNeg(String codNeg){
 
-        return new B3AcoesDTO (b3AcoesRepository.findByCodNegContains(codNeg));
+        //List<B3AcoesDTO> listaAcoesB3 = (b3AcoesRepository.findByCodNegContains(codNeg));
+
+        return null;
 
     }
 

@@ -1,6 +1,6 @@
-package br.com.validabr.financas.gateway.dto;
+package br.com.validabr.buscacep.gateway.dto;
 
-import br.com.validabr.financas.gateway.entity.B3AcoesEntity;
+import br.com.validabr.buscacep.gateway.entity.B3AcoesEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

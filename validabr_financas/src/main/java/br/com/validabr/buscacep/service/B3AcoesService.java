@@ -1,6 +1,6 @@
-package br.com.validabr.financas.service;
+package br.com.validabr.buscacep.service;
 
-import br.com.validabr.financas.gateway.dto.B3AcoesDTO;
+import br.com.validabr.buscacep.gateway.dto.B3AcoesDTO;
 
 import java.util.List;
 

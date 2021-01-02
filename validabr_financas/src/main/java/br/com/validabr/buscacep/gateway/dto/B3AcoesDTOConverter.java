@@ -1,4 +1,4 @@
-package br.com.validabr.financas.gateway.dto;
+package br.com.validabr.buscacep.gateway.dto;
 
 import java.math.BigInteger;
 import java.text.ParseException;

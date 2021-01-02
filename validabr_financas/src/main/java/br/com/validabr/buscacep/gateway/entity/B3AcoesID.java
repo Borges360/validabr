@@ -1,4 +1,4 @@
-package br.com.validabr.financas.gateway.entity;
+package br.com.validabr.buscacep.gateway.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
