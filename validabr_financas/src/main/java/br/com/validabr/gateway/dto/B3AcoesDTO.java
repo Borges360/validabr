@@ -39,5 +39,4 @@ public class B3AcoesDTO {
     private int num_dis;
 
 
-
 }

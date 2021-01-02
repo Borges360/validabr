@@ -1,4 +1,4 @@
-package br.com.validabr.financas.data.converter;
+package br.com.validabr.gateway;
 
 import br.com.validabr.gateway.dto.B3AcoesDTO;
 

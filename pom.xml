@@ -5,8 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.8.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.1.8.RELEASE</version><!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.validabr</groupId>
 	<artifactId>validabr</artifactId>
@@ -20,6 +19,7 @@
 		<module>validabr_buscacep</module>
 		<module>validabr_application</module>
         <module>validabr_financas</module>
+        <module>validabr_data</module>
     </modules>
 	<dependencies>
 		<dependency>
