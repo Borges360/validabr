@@ -1,6 +1,7 @@
 package br.com.validabr.financas.gateway;
 
 import br.com.validabr.buscacep.gateway.BuscaCepController;
+import br.com.validabr.validabr_application.ValidabrApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = BuscaCepController.class)
+@WebMvcTest(controllers = B3AcoesController.class)
 @ContextConfiguration(classes = {TestContext.class})
 @WebAppConfiguration
 public class AnswerControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private BuscaCepController buscaCepControlle;
 
     @Test
     public void testController_HTTPStatus200_Financas() throws Exception {

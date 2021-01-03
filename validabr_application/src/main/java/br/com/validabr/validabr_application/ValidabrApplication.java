@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"br.com.validabr.buscacep.*", "br.com.validabr.financas.*"})
-@EnableJpaRepositories(basePackages = {"br.com.validabr.buscacep.repository", "br.com.validabr.financas.repository"})
-@EntityScan(basePackages = {"br.com.validabr.buscacep.gateway.*", "br.com.validabr.financas.gateway*"})
+@EnableJpaRepositories(basePackages = {"br.com.validabr.buscacep.*", "br.com.validabr.financas.*"})
+@EntityScan(basePackages = {"br.com.validabr.buscacep.*", "br.com.validabr.financas.*"})
 @EnableScheduling
 public class ValidabrApplication {
 

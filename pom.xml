@@ -19,7 +19,7 @@
 		<module>validabr_buscacep</module>
 		<module>validabr_application</module>
         <module>validabr_financas</module>
-        <module>validabr_data</module>
+        <module>validabr_datas</module>
     </modules>
 	<dependencies>
 		<dependency>

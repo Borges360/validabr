@@ -24,9 +24,6 @@ public class AnswerControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private BuscaCepController buscaCepControlle;
-
     @Test
     public void testController_HTTPStatus200_ConsultaCep() throws Exception {
 

@@ -8,18 +8,16 @@ import br.com.validabr.buscacep.repository.ConsultaCidadeEstadoRepository;
 import br.com.validabr.buscacep.service.BuscaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
 @Service
 public class BuscaCepServiceImpl implements BuscaCepService {
 
     @Autowired
-    ConsultaCepRepository consultaCepRepository;
+    private ConsultaCepRepository consultaCepRepository;
 
     @Autowired
-    ConsultaCidadeEstadoRepository consultaCidadeEstadoRepository;
+    private ConsultaCidadeEstadoRepository consultaCidadeEstadoRepository;
 
     public EnderecoDTO buscaCep(String cep){
 
