@@ -1,9 +1,7 @@
 package br.com.validabr.financas.extracao;
 
 
-import br.com.validabr.gateway.dto.B3AcoesDTO;
 import org.junit.Test;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
 import java.io.*;
 import java.net.URL;
@@ -36,7 +34,7 @@ public class ExtracaoDadosSerieHistorica {
     }
 
     @Test
-    public void baixaSerieHistoricaB3(){
+    public static void baixaSerieHistoricaB3(ExtracaoDadosSerieHistorica extracaoDadosSerieHistorica){
 
         String path = "http://bvmf.bmfbovespa.com.br/InstDados/SerHist/COTAHIST_D29122020.ZIP";
 
@@ -47,17 +45,20 @@ public class ExtracaoDadosSerieHistorica {
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
             }
+            extracaoDadosSerieHistorica.unzipFile(fileOutputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
+
     }
 
-    private File unzipFile(File arquivo) throws IOException {
+    private File unzipFile(FileOutputStream arquivo) throws IOException {
 
-        String sourceFile = "test1.txt";
-        FileOutputStream fos = new FileOutputStream(arquivo);
-        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        String sourceFile = "COTAHIST_D29122020.csv";
+
+        ZipOutputStream zipOut = new ZipOutputStream(arquivo);
         File fileToZip = new File(sourceFile);
         FileInputStream fis = new FileInputStream(fileToZip);
         ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
@@ -69,7 +70,6 @@ public class ExtracaoDadosSerieHistorica {
         }
         zipOut.close();
         fis.close();
-        fos.close();
 
         return fileToZip;
     }

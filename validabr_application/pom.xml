@@ -8,10 +8,22 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>validabr_application</artifactId>
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>br.com.validabr</groupId>
             <artifactId>validabr_buscacep</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.validabr</groupId>
+            <artifactId>validabr_financas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.validabr</groupId>
+            <artifactId>validabr_datas</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -54,5 +66,7 @@
             </plugin>
         </plugins>
     </build>
+
+
 
 </project>

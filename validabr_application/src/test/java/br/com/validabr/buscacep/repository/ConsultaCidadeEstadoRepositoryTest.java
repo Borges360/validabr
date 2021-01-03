@@ -1,7 +1,7 @@
 package br.com.validabr.buscacep.repository;
 
 import br.com.validabr.buscacep.gateway.entity.BairroCidadeEntity;
-import br.com.validabr.buscacep.gateway.entity.EnderecoEntity;
+import br.com.validabr.buscacep.repository.ConsultaCidadeEstadoRepository;
 import br.com.validabr.validabr_application.ValidabrApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

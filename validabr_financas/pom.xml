@@ -6,10 +6,12 @@
         <artifactId>validabr</artifactId>
         <groupId>br.com.validabr</groupId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>validabr_financas</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -17,6 +19,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>br.com.validabr</groupId>
+            <artifactId>validabr_datas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-mr</artifactId>
+            <version>0.13.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

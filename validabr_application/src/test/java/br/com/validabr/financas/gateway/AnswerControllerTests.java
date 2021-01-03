@@ -1,4 +1,4 @@
-package br.com.validabr.buscacep.gateway;
+package br.com.validabr.financas.gateway;
 
 import br.com.validabr.buscacep.gateway.BuscaCepController;
 import org.junit.Test;
@@ -28,17 +28,9 @@ public class AnswerControllerTests {
     private BuscaCepController buscaCepControlle;
 
     @Test
-    public void testController_HTTPStatus200_ConsultaCep() throws Exception {
+    public void testController_HTTPStatus200_Financas() throws Exception {
 
-        this.mockMvc.perform(get("/v1/consulta-cep/{cep}","04561914"))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void testController_HTTPStatus200_BuscaCepComEnderecoECidade() throws Exception {
-
-        this.mockMvc.perform(get("/v1/consulta-endereco-cidade/{endereco}/{cidade}","Rua Guararapes 443", "São Paulo"))
+        this.mockMvc.perform(get("/v1/consulta/{codNeg}/cod-neg","ITUB4"))
                 .andExpect(status().isOk());
 
     }

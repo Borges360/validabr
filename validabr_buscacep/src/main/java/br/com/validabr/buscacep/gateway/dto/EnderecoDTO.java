@@ -1,7 +1,7 @@
 package br.com.validabr.buscacep.gateway.dto;
 
-import br.com.validabr.buscacep.gateway.entity.BairroCidadeEntity;
 import br.com.validabr.buscacep.gateway.entity.EnderecoEntity;
+import br.com.validabr.buscacep.gateway.entity.BairroCidadeEntity;
 import lombok.*;
 
 @Data
