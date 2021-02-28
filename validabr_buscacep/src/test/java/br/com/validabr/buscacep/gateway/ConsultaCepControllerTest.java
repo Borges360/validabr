@@ -1,13 +1,11 @@
 package br.com.validabr.buscacep.gateway;
 
-
-
-import br.com.validabr.validabr_application.ValidabrApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,10 +16,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = BuscaCepController.class)
+@WebMvcTest(value = BuscaCepController.class)
 @ContextConfiguration(classes = {TestContext.class})
 @WebAppConfiguration
-public class AnswerControllerTests {
+public class ConsultaCepControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,6 +39,5 @@ public class AnswerControllerTests {
                 .andExpect(status().isOk());
 
     }
-
 
 }

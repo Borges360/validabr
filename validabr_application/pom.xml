@@ -6,9 +6,10 @@
         <groupId>br.com.validabr</groupId>
         <artifactId>validabr</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath />
+
     </parent>
     <artifactId>validabr_application</artifactId>
-    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -55,6 +56,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
     </dependencies>
 

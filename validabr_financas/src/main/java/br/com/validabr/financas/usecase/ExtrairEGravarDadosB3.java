@@ -1,11 +1,9 @@
-package br.com.validabr.financas.extracao;
+package br.com.validabr.financas.usecase;
 
-
-import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
 import java.net.URL;
-
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -17,14 +15,48 @@ import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+public class ExtrairEGravarDadosB3 {
 
-public class ExtracaoDadosSerieHistorica {
+    @Value("${app.B3.url.host})")
+    private String enderecoDownloadB3;
 
-    @Test
-    public void extracaoSerieHistoricaBolsa() throws IOException {
+    @Value("${local.download.b3.serieHistorica.zip})")
+    private String enderecoEntradaArquivoB3;
 
-        Scanner scanner = new Scanner(new File("C:\\desenvolvimento\\ValidaBr\\DadosB3\\COTAHIST_D11022021.TXT"));
-        BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\desenvolvimento\\ValidaBr\\DadosB3\\COTAHIST_D11022021.csv"));
+    @Value("${local.download.b3.serieHistorica.descompactado})")
+    private String enderecoSaidaArquivoB3;
+
+    @Value("${local.download.b3.serieHistorica.descompactado.csv})")
+    private String enderecoSaidaArquivoB3Csv;
+
+
+
+    public File baixaSerieHistoricaB3(String dataHoje) throws IOException {
+
+        String fileName = "COTAHIST_D" + dataHoje + ".ZIP";
+        String path = enderecoDownloadB3 + fileName;
+
+        try (BufferedInputStream in = new BufferedInputStream(new URL(path).openStream());
+             FileOutputStream fileOutputStream = new FileOutputStream(fileName)) {
+            byte[] dataBuffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                fileOutputStream.write(dataBuffer, 0, bytesRead);
+            }
+            unzipFile(enderecoEntradaArquivoB3 + "\\" + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return convertSerieHistoricaBolsaTxtParaCsv(dataHoje);
+
+    }
+
+    public File convertSerieHistoricaBolsaTxtParaCsv(String dataHoje) throws IOException {
+
+        Scanner scanner = new Scanner(new File(enderecoSaidaArquivoB3 + "\\COTAHIST_D" + dataHoje + ".TXT"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(enderecoSaidaArquivoB3Csv + "\\COTAHIST_D" + dataHoje + ".csv"));
+        File arquivoCsvHoje = new File(enderecoSaidaArquivoB3Csv + "\\COTAHIST_D" + dataHoje + ".csv");
 
         while (scanner.hasNextLine()) {
 
@@ -34,35 +66,11 @@ public class ExtracaoDadosSerieHistorica {
             bw.newLine();
 
         }
-
         bw.close();
-
+        return arquivoCsvHoje;
     }
 
-    @Test
-    public void baixaSerieHistoricaB3(){
-
-        String path = "http://bvmf.bmfbovespa.com.br/InstDados/SerHist/COTAHIST_D11022021.ZIP";
-
-        try (BufferedInputStream in = new BufferedInputStream(new URL(path).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("COTAHIST_D11022021.ZIP")) {
-            byte[] dataBuffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
-            }
-            unzipFile("C:\\Desenvolvimento\\ValidaBr\\validabr\\validabr_application\\COTAHIST_D11022021.ZIP");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
-
-    private void unzipFile(String arquivo) throws IOException {
-
-        String sourceFile = "C:\\Desenvolvimento\\ValidaBr\\validabr\\validabr_application\\COTAHIST_D11022021.csv";
+    public void unzipFile(String arquivo) throws IOException {
 
         try(ZipFile file = new ZipFile(arquivo))
         {
@@ -71,8 +79,7 @@ public class ExtracaoDadosSerieHistorica {
             Enumeration<? extends ZipEntry> entries = file.entries();
 
             //We will unzip files in this folder
-            String uncompressedDirectory = "descompactados/";
-            Files.createDirectory(fileSystem.getPath(uncompressedDirectory));
+            Files.createDirectory(fileSystem.getPath(enderecoSaidaArquivoB3));
 
             //Iterate over entries
             while (entries.hasMoreElements())
@@ -81,15 +88,15 @@ public class ExtracaoDadosSerieHistorica {
                 //If directory then create a new directory in uncompressed folder
                 if (entry.isDirectory())
                 {
-                    System.out.println("Creating Directory:" + uncompressedDirectory + entry.getName());
-                    Files.createDirectories(fileSystem.getPath(uncompressedDirectory + entry.getName()));
+                    System.out.println("Creating Directory:" + enderecoSaidaArquivoB3 + entry.getName());
+                    Files.createDirectories(fileSystem.getPath(enderecoSaidaArquivoB3 + entry.getName()));
                 }
                 //Else create the file
                 else
                 {
                     InputStream is = file.getInputStream(entry);
                     BufferedInputStream bis = new BufferedInputStream(is);
-                    String uncompressedFileName = uncompressedDirectory + entry.getName();
+                    String uncompressedFileName = enderecoSaidaArquivoB3 + entry.getName();
                     Path uncompressedFilePath = fileSystem.getPath(uncompressedFileName);
                     Files.createFile(uncompressedFilePath);
                     FileOutputStream fileOutput = new FileOutputStream(uncompressedFileName);
@@ -144,7 +151,4 @@ public class ExtracaoDadosSerieHistorica {
 
         return linhaTrada;
     }
-
-
-
 }
