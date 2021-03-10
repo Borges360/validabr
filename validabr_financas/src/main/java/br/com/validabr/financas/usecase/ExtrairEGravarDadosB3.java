@@ -1,6 +1,7 @@
 package br.com.validabr.financas.usecase;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URL;
@@ -14,49 +15,31 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
+@Service
 public class ExtrairEGravarDadosB3 {
 
     @Value("${app.B3.url.host})")
     private String enderecoDownloadB3;
 
-    @Value("${local.download.b3.serieHistorica.zip})")
+    @Value("${local.download.b3.serieHistorica.zip}")
     private String enderecoEntradaArquivoB3;
 
-    @Value("${local.download.b3.serieHistorica.descompactado})")
+    @Value("${local.download.b3.serieHistorica.descompactado}")
     private String enderecoSaidaArquivoB3;
 
-    @Value("${local.download.b3.serieHistorica.descompactado.csv})")
+    @Value("${local.download.b3.serieHistorica.descompactado.csv}")
     private String enderecoSaidaArquivoB3Csv;
 
+    public void convertSerieHistoricaBolsaTxtParaCsv(String dataOntem) throws IOException {
 
-
-    public File baixaSerieHistoricaB3(String dataHoje) throws IOException {
-
-        String fileName = "COTAHIST_D" + dataHoje + ".ZIP";
-        String path = enderecoDownloadB3 + fileName;
-
-        try (BufferedInputStream in = new BufferedInputStream(new URL(path).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream(fileName)) {
-            byte[] dataBuffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
-            }
-            unzipFile(enderecoEntradaArquivoB3 + "\\" + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Scanner scanner = new Scanner(new File(enderecoSaidaArquivoB3 + "\\COTAHIST_D" + dataOntem + ".TXT"));
+        File arquivoCsvHoje = new File(enderecoSaidaArquivoB3Csv);
+        if (!arquivoCsvHoje.exists()){
+            arquivoCsvHoje.mkdirs();
         }
-
-        return convertSerieHistoricaBolsaTxtParaCsv(dataHoje);
-
-    }
-
-    public File convertSerieHistoricaBolsaTxtParaCsv(String dataHoje) throws IOException {
-
-        Scanner scanner = new Scanner(new File(enderecoSaidaArquivoB3 + "\\COTAHIST_D" + dataHoje + ".TXT"));
-        BufferedWriter bw = new BufferedWriter(new FileWriter(enderecoSaidaArquivoB3Csv + "\\COTAHIST_D" + dataHoje + ".csv"));
-        File arquivoCsvHoje = new File(enderecoSaidaArquivoB3Csv + "\\COTAHIST_D" + dataHoje + ".csv");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(enderecoSaidaArquivoB3Csv + "\\COTAHIST_D" + dataOntem + ".csv"));
 
         while (scanner.hasNextLine()) {
 
@@ -67,51 +50,60 @@ public class ExtrairEGravarDadosB3 {
 
         }
         bw.close();
-        return arquivoCsvHoje;
+
     }
 
     public void unzipFile(String arquivo) throws IOException {
-
-        try(ZipFile file = new ZipFile(arquivo))
-        {
-            FileSystem fileSystem = FileSystems.getDefault();
-            //Get file entries
-            Enumeration<? extends ZipEntry> entries = file.entries();
-
-            //We will unzip files in this folder
-            Files.createDirectory(fileSystem.getPath(enderecoSaidaArquivoB3));
-
-            //Iterate over entries
-            while (entries.hasMoreElements())
-            {
-                ZipEntry entry = entries.nextElement();
-                //If directory then create a new directory in uncompressed folder
-                if (entry.isDirectory())
-                {
-                    System.out.println("Creating Directory:" + enderecoSaidaArquivoB3 + entry.getName());
-                    Files.createDirectories(fileSystem.getPath(enderecoSaidaArquivoB3 + entry.getName()));
-                }
-                //Else create the file
-                else
-                {
-                    InputStream is = file.getInputStream(entry);
-                    BufferedInputStream bis = new BufferedInputStream(is);
-                    String uncompressedFileName = enderecoSaidaArquivoB3 + entry.getName();
-                    Path uncompressedFilePath = fileSystem.getPath(uncompressedFileName);
-                    Files.createFile(uncompressedFilePath);
-                    FileOutputStream fileOutput = new FileOutputStream(uncompressedFileName);
-                    while (bis.available() > 0)
-                    {
-                        fileOutput.write(bis.read());
+        try {
+            String fileZip = arquivo;
+            File destDir = new File(enderecoSaidaArquivoB3);
+            if (!destDir.exists()){
+                destDir.mkdirs();
+            }
+            byte[] buffer = new byte[1024];
+            ZipInputStream zis = new ZipInputStream(new FileInputStream(fileZip));
+            ZipEntry zipEntry = zis.getNextEntry();
+            while (zipEntry != null) {
+                File newFile = newFile(destDir, zipEntry);
+                if (zipEntry.isDirectory()) {
+                    if (!newFile.isDirectory() && !newFile.mkdirs()) {
+                        throw new IOException("Failed to create directory " + newFile);
                     }
-                    fileOutput.close();
-                    System.out.println("Written :" + entry.getName());
+                } else {
+                    // fix for Windows-created archives
+                    File parent = newFile.getParentFile();
+                    if (!parent.isDirectory() && !parent.mkdirs()) {
+                        throw new IOException("Failed to create directory " + parent);
+                    }
+
+                    // write file content
+                    FileOutputStream fos = new FileOutputStream(newFile);
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                    fos.close();
                 }
+                zipEntry = zis.getNextEntry();
             }
         }
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+
+    private static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+        File destFile = new File(destinationDir, zipEntry.getName());
+
+        String destDirPath = destinationDir.getCanonicalPath();
+        String destFilePath = destFile.getCanonicalPath();
+
+        if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            throw new IOException("Entry is outside of the target dir: " + zipEntry.getName());
+        }
+
+        return destFile;
     }
 
     private String separadorDeDados(String linha){

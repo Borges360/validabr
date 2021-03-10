@@ -2,6 +2,7 @@ package br.com.validabr.financas.extracao;
 
 
 import org.junit.Test;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URL;
